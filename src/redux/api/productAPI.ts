@@ -16,37 +16,40 @@ export const productAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_SERVER}/api/v1/product/`,
   }),
-  tagTypes: ["Product"],
+  tagTypes: ["product"],
   endpoints: (builder) => ({
     latestProducts: builder.query<AllProductsResponse, string>({
       query: () => "latest",
-      providesTags: ["Product"],
+      providesTags: ["product"],
     }),
     allProducts: builder.query<AllProductsResponse, string>({
-      query: (id) => `admin-product?id=${id}`,
-      providesTags: ["Product"],
+      query: (id) => `admin-products?id=${id}`,
+      providesTags: ["product"],
     }),
     categories: builder.query<CategoriesResponse, string>({
-      query: () => `category`,
-      providesTags: ["Product"],
+      query: () => `categories`,
+      providesTags: ["product"],
     }),
+
     searchProducts: builder.query<
       SearchProductsResponse,
       SearchProductsRequest
     >({
       query: ({ price, search, sort, category, page }) => {
-        let base = `all?search=${search}&page${page}`;
+        let base = `all?search=${search}&page=${page}`;
+
         if (price) base += `&price=${price}`;
         if (sort) base += `&sort=${sort}`;
         if (category) base += `&category=${category}`;
 
         return base;
       },
-      providesTags: ["Product"],
+      providesTags: ["product"],
     }),
+
     productDetails: builder.query<ProductResponse, string>({
       query: (id) => id,
-      providesTags: ["Product"],
+      providesTags: ["product"],
     }),
 
     newProduct: builder.mutation<MessageResponse, NewProductRequest>({
@@ -55,7 +58,7 @@ export const productAPI = createApi({
         method: "POST",
         body: formData,
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["product"],
     }),
 
     updateProduct: builder.mutation<MessageResponse, UpdateProductRequest>({
@@ -64,7 +67,7 @@ export const productAPI = createApi({
         method: "PUT",
         body: formData,
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["product"],
     }),
 
     deleteProduct: builder.mutation<MessageResponse, DeleteProductRequest>({
@@ -72,7 +75,7 @@ export const productAPI = createApi({
         url: `${productId}?id=${userId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["product"],
     }),
   }),
 });
