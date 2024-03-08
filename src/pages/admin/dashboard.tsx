@@ -88,7 +88,7 @@ const Dashboard = () => {
                 <h2>Inventory</h2>
 
                 <div>
-                  {stats?.categoryCount?.map((i: CategoryCount) => {
+                  {stats.categoryCount.map((i) => {
                     const [heading, value] = Object.entries(i)[0];
                     return (
                       <CategoryItem
