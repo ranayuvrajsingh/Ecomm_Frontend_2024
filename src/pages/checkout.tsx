@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Elements,
   PaymentElement,
@@ -54,7 +52,7 @@ const CheckOutForm = () => {
       discount,
       shippingCharges,
       total,
-      user: user?._id!,
+      user: (user ?? {})._id!,
     };
 
     try {
@@ -78,7 +76,7 @@ const CheckOutForm = () => {
       }
     } catch (error) {
       console.error("Payment confirmation error:", error);
-      return toast.error(error.message || "Something went wrong");
+      return toast.error("Something went wrong");
     } finally {
       setIsProcessing(false);
     }
