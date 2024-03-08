@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import AdminSidebar from "../../../components/admin/AdminSidebar";
@@ -12,7 +11,7 @@ const { last12Months: months } = getLastMonths();
 const Linecharts = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
 
-  const { isLoading, data, isError } = useLineQuery(user?._id!);
+  const { isLoading, data, isError } = useLineQuery((user ?? {})._id!);
 
   const products = data?.charts.products || [];
   const users = data?.charts.user || [];

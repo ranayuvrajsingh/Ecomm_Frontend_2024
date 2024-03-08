@@ -61,7 +61,7 @@ export type StatsResponse = {
 };
 export type PieResponse = {
   success: boolean;
-  charts: Pie;
+  charts?: Pie;
 };
 export type BarResponse = {
   success: boolean;
