@@ -50,25 +50,25 @@ export type Order = {
   _id: string;
 };
 
-type CountAndChange = {
+type changePercent = {
   revenue: number;
   product: number;
   user: number;
   order: number;
 };
 
-type latestTransaction = {
+export type latestTransaction = {
   _id: string;
   amount: number;
   discount: number;
   quantity: number;
   status: string;
 };
-
+type CategoryCountItem = Record<string, number>;
 export type Stats = {
-  categoryCount: Record<string, number>;
-  changePercent: CountAndChange;
-  count: CountAndChange;
+  categoryCount: CategoryCountItem[];
+  changePercent: changePercent;
+  count: changePercent;
   chart: {
     order: number[];
     revenue: number[];
@@ -77,7 +77,7 @@ export type Stats = {
     male: number;
     female: number;
   };
-  latestTransaction: latestTransaction;
+  latestTransaction: latestTransaction[];
 };
 
 type OrderFulfilment = {

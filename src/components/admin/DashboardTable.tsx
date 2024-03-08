@@ -8,7 +8,6 @@ interface DataType {
   amount: number;
   status: string;
 }
-
 const columns: Column<DataType>[] = [
   {
     Header: "Id",
