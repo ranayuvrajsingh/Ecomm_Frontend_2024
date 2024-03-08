@@ -64,9 +64,11 @@ export type latestTransaction = {
   quantity: number;
   status: string;
 };
-type CategoryCountItem = Record<string, number>;
+interface CategoryCount {
+  [key: string]: number;
+}
 export type Stats = {
-  categoryCount: CategoryCountItem[];
+  categoryCount: CategoryCount[];
   changePercent: changePercent;
   count: changePercent;
   chart: {

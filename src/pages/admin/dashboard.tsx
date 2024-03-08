@@ -20,9 +20,9 @@ const { last6Months: months } = getLastMonths();
 const Dashboard = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
 
-  const { isLoading, data, isError } = useStatsQuery((user ?? {})._id!);
+  const { isLoading, data, isError } = useStatsQuery(user?._id!);
 
-  const stats = (data ?? {}).stats!;
+  const stats = data?.stats!;
 
   if (isError) return <Navigate to={"/"} />;
 
@@ -88,14 +88,14 @@ const Dashboard = () => {
                 <h2>Inventory</h2>
 
                 <div>
-                  {stats?.categoryCount.map((i) => {
+                  {stats.categoryCount.map((i) => {
                     const [heading, value] = Object.entries(i)[0];
                     return (
                       <CategoryItem
                         key={heading}
                         value={value}
                         heading={heading}
-                        color={`hsl(${i.value * 4}, ${i.value}%, 50%)`}
+                        color={`hsl(${value * 4}, ${value}%, 50%)`}
                       />
                     );
                   })}
