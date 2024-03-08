@@ -62,7 +62,7 @@ const Products = () => {
       // console.log("data Id", data);
 
       setRows(
-        data.products?.map((i) => ({
+        data.Products?.map((i) => ({
           photo: <img src={`${server}/${i.photo}`} />,
           name: i.name,
           price: i.price,

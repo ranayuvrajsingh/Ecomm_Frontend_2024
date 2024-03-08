@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { ReactElement, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { Column } from "react-table";
@@ -14,6 +13,7 @@ import { CustomError } from "../../types/api-types";
 import toast from "react-hot-toast";
 import { Skeleton } from "../../components/loader";
 import { responseToast } from "../../utils/features";
+import { User } from "../../types/types";
 
 interface DataType {
   avatar: ReactElement;
@@ -57,7 +57,12 @@ const columns: Column<DataType>[] = [
 
 const Customers = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
-  const { data, isLoading, isError } = useAllUsersQuery(user?._id!);
+  const { data, isLoading, isError } = useAllUsersQuery((user ?? {})._id!) ?? {
+    data: undefined,
+    isLoading: false,
+    isError: false,
+  };
+
   const [rows, setRows] = useState<DataType[]>([]);
   const [deleteUser] = useDeleteUserMutation();
 
@@ -67,19 +72,18 @@ const Customers = () => {
 
   const deleteHandler = async (userId: string) => {
     try {
-      const res = await deleteUser({ userId, adminUserId: user?._id! });
+      const res = await deleteUser({ userId, adminUserId: (user ?? {})._id! });
       responseToast(res, null, "");
     } catch (error) {
       handleApiError(error as CustomError);
     }
   };
-
   useEffect(() => {
-    console.log("Data received:", data);
+    console.log("Data received:", data?.users[0]);
 
-    if (data?.success && data?.data) {
+    if (data?.success && data?.users) {
       setRows(
-        data.data.map((i) => ({
+        data.users.map((i: User) => ({
           avatar: (
             <img
               style={{ borderRadius: "10px" }}

@@ -32,7 +32,7 @@ export type UserResponse = {
 
 export type AllProductsResponse = {
   success: boolean;
-  products: Product[];
+  Products: Product[];
 };
 export type CategoriesResponse = {
   success: boolean;

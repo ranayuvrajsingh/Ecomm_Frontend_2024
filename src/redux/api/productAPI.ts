@@ -16,19 +16,19 @@ export const productAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_SERVER}/api/v1/product/`,
   }),
-  tagTypes: ["product"],
+  tagTypes: ["Product"],
   endpoints: (builder) => ({
     latestProducts: builder.query<AllProductsResponse, string>({
       query: () => "latest",
-      providesTags: ["product"],
+      providesTags: ["Product"],
     }),
     allProducts: builder.query<AllProductsResponse, string>({
       query: (id) => `admin-product?id=${id}`,
-      providesTags: ["product"],
+      providesTags: ["Product"],
     }),
     categories: builder.query<CategoriesResponse, string>({
       query: () => `category`,
-      providesTags: ["product"],
+      providesTags: ["Product"],
     }),
     searchProducts: builder.query<
       SearchProductsResponse,
@@ -42,11 +42,11 @@ export const productAPI = createApi({
 
         return base;
       },
-      providesTags: ["product"],
+      providesTags: ["Product"],
     }),
     productDetails: builder.query<ProductResponse, string>({
       query: (id) => id,
-      providesTags: ["product"],
+      providesTags: ["Product"],
     }),
 
     newProduct: builder.mutation<MessageResponse, NewProductRequest>({
@@ -55,7 +55,7 @@ export const productAPI = createApi({
         method: "POST",
         body: formData,
       }),
-      invalidatesTags: ["product"],
+      invalidatesTags: ["Product"],
     }),
 
     updateProduct: builder.mutation<MessageResponse, UpdateProductRequest>({
@@ -64,7 +64,7 @@ export const productAPI = createApi({
         method: "PUT",
         body: formData,
       }),
-      invalidatesTags: ["product"],
+      invalidatesTags: ["Product"],
     }),
 
     deleteProduct: builder.mutation<MessageResponse, DeleteProductRequest>({
@@ -72,7 +72,7 @@ export const productAPI = createApi({
         url: `${productId}?id=${userId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["product"],
+      invalidatesTags: ["Product"],
     }),
   }),
 });
