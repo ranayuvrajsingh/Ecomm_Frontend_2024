@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { ReactElement, useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -48,7 +47,9 @@ const Products = () => {
   const { user } = useSelector(
     (state: { userReducer: userReducerInitialState }) => state.userReducer
   );
-  const { data, isLoading, isError, error } = useAllProductsQuery(user?._id!);
+  const { data, isLoading, isError, error } = useAllProductsQuery(
+    (user ?? {})._id!
+  );
   // console.log(user?._id);
   const [rows, setRows] = useState<DataType[]>([]);
 
@@ -59,10 +60,10 @@ const Products = () => {
 
   useEffect(() => {
     if (data) {
-      // console.log("data Id", data);
+      console.log("data Id", data);
 
       setRows(
-        data.products?.map((i) => ({
+        data?.products?.map((i) => ({
           photo: <img src={`${server}/${i.photo}`} />,
           name: i.name,
           price: i.price,
