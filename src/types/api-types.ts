@@ -23,7 +23,7 @@ export type MessageResponse = {
 };
 export type AllUserResponse = {
   success: boolean;
-  users: User[];
+  data: User[];
 };
 export type UserResponse = {
   success: boolean;

@@ -79,11 +79,11 @@ const Customers = () => {
     }
   };
   useEffect(() => {
-    console.log("Data received:", data?.users[0]);
+    console.log("Data received:", data?.data[0]);
 
-    if (data?.success && data?.users) {
+    if (data?.success && data?.data) {
       setRows(
-        data.users.map((i: User) => ({
+        data.data.map((i: User) => ({
           avatar: (
             <img
               style={{ borderRadius: "10px" }}
